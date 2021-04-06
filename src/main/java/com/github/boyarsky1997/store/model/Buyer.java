@@ -5,7 +5,7 @@ public class Buyer extends User {
         super(Role.BUYER);
     }
 
-    public Buyer(Integer id, String login, String password, String name, String surname, boolean blackList) {
-        super(id, Role.BUYER, login, password, name, surname, blackList);
+    public Buyer(Integer id, String login, String password, String name, String surname) {
+        super(id, Role.BUYER, login, password, name, surname);
     }
 }

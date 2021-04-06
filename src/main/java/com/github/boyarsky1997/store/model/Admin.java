@@ -5,7 +5,7 @@ public class Admin extends User {
         super(Role.ADMIN);
     }
 
-    public Admin(Integer id, String login, String password, String name, String surname, boolean blackList) {
-        super(id, Role.ADMIN, login, password, name, surname, blackList);
+    public Admin(Integer id, String login, String password, String name, String surname) {
+        super(id, Role.ADMIN, login, password, name, surname);
     }
 }

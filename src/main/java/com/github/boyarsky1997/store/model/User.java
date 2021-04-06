@@ -14,15 +14,13 @@ public abstract class User {
     public User(Role student) {
     }
 
-    public User(Integer id, Role role, String login, String password, String name, String surname,boolean blackList) {
+    public User(Integer id, Role role, String login, String password, String name, String surname) {
         this.id = id;
         this.role = role;
         this.login = login;
         this.password = password;
         this.name = name;
         this.surname = surname;
-        this.blackList=blackList;
-
     }
 
     public boolean isBlackList() {

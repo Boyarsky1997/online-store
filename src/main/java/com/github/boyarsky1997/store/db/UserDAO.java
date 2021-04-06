@@ -24,7 +24,37 @@ public class UserDAO {
     UserDAO(Connection connection) {
         this.connection = connection;
     }
+    public boolean checkExistLogin(String login) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    Resources.load("/sql/checkClient.sql"));
+            preparedStatement.setString(1, login);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            logger.info(String.format("The client is being searched by login %s ", login));
+            if (resultSet.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            logger.info(e.getMessage(), e);
+        }
+        return false;
+    }
 
+    public void insertUser(User user) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    Resources.load("/sql/insertUser.sql"));
+            preparedStatement.setString(1, user.getRole().toString());
+            preparedStatement.setString(2, user.getName());
+            preparedStatement.setString(3, user.getSurname());
+            preparedStatement.setString(4, user.getLogin());
+            preparedStatement.setString(5, user.getPassword());
+            preparedStatement.execute();
+            logger.info("Клієнт був успішно доданий");
+        } catch (SQLException e) {
+            logger.error(e.getMessage(), e);
+        }
+    }
     public User get(String login, String password) {
         User client;
         try {

@@ -43,7 +43,7 @@ public class LoginServlet extends HttpServlet {
         } else {
             HttpSession session = req.getSession(true);
             session.setAttribute("client", client);
-            resp.sendRedirect("/profile");
+            resp.sendRedirect("/");
         }
     }
 }
