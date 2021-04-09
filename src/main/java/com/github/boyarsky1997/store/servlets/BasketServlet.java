@@ -65,7 +65,6 @@ public class BasketServlet extends HttpServlet {
             int id = orderDAO.getExistingOpenOrder(client.getId());
 //            List<Product> productList = productDAO.getAllProductOnOrderId(id);
             String idProduct = req.getParameter("id");
-            orderDAO.removeProductFromOrder(Integer.parseInt(idProduct),id);
 //            logger.info(idProduct);
 //
 //            for (int i = 0; i < productList.size(); i++) {

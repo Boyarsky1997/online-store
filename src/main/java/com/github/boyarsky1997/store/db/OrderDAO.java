@@ -1,10 +1,13 @@
 package com.github.boyarsky1997.store.db;
 
 import com.github.boyarsky1997.store.model.Order;
+import com.github.boyarsky1997.store.model.Product;
 import com.github.boyarsky1997.store.util.Resources;
 import org.apache.log4j.Logger;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class OrderDAO {
     private static final Logger logger = Logger.getLogger(OrderDAO.class);
@@ -19,10 +22,29 @@ public class OrderDAO {
         this.connection = connection;
     }
 
-
-    public void removeProductFromOrder(int idProduct, int idOrder){
+    public List<Order> getPaidProducts(int idBuyer) {
+        List<Order> orderList = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement(Resources.load("/sql/getAllPaidOrders.sql"));
+            preparedStatement.setInt(1, idBuyer);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Order order = new Order();
+                order.setId(resultSet.getInt(1));
+                order.setBuyerId(resultSet.getInt(2));
+                order.setPrice(resultSet.getDouble(3));
+                order.setDate(resultSet.getDate(4));
+                orderList.add(order);
+            }
+        } catch (SQLException e) {
+            logger.error(e.getMessage(), e);
+        }
+        return orderList;
 
     }
+
+
     public Order getAllOrderInBuyerId(int buyerId) {
         Order order = new Order();
         try {

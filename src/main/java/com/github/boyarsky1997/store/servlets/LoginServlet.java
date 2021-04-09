@@ -35,11 +35,14 @@ public class LoginServlet extends HttpServlet {
         String email = req.getParameter("email");
         System.out.println(email + password);
         User client = userDAO.get(email, password);
+
         logger.info(client);
         if (client == null) {
             req.setAttribute("unfaithful", "Incorrect login or password");
             req.getRequestDispatcher("/jsp/login.jsp").include(req, resp);
-
+        }else if (client.isBlackList()){
+            req.setAttribute("blacklist", "This account is blacklisted");
+            req.getRequestDispatcher("/jsp/login.jsp").include(req, resp);
         } else {
             HttpSession session = req.getSession(true);
             session.setAttribute("client", client);

@@ -193,6 +193,7 @@ public class UserDAO {
                 client.setSurname(resultSet.getString(4));
                 client.setLogin(resultSet.getString(5));
                 client.setPassword(resultSet.getString(6));
+                client.setBlackList(resultSet.getBoolean(7));
 
                 return client;
             }

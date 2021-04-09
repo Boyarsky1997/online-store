@@ -10,20 +10,36 @@
 </head>
 <body>
 <jsp:include page="header.jsp"/>
-<ul class="list-group list-group-flush">
-    <li class="list-group-item">Buyers:</li>
+<table class="table table-dark">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Surname</th>
+        <th scope="col">Blacklist</th>
+    </tr>
+    </thead>
+    <tbody>
     <c:forEach var="buyer" items="${buyerList}">
-    <form class="row g-3" method="post" action="/buyers?id=${buyer.getId()}">
-    <li class="list-group-item"><a class="nav-link" >${buyer.getName()} - ${buyer.getSurname()}
-        <button type="submit" class="btn btn-outline-secondary">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-fill" viewBox="0 0 16 16">
-                <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z"></path>
-            </svg>
-            <span class="visually-hidden">Button</span>
-        </button></a></li>
-    </form>
+        <tr>
+            <th scope="row">2</th>
+            <td>${buyer.getName()}</td>
+            <td> ${buyer.getSurname()}</td>
+            <td>
+                <form class="row g-3" method="post" action="/buyers?id=${buyer.getId()}">
+                    <button type="submit" class="btn btn-outline-secondary">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                             class="bi bi-plus" viewBox="0 0 16 16">
+                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"></path>
+                        </svg>
+                        <span class="visually-hidden">Button</span>
+                    </button>
+                </form>
+            </td>
+        </tr>
     </c:forEach>
-</ul>
+    </tbody>
+</table>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
         crossorigin="anonymous"></script>
