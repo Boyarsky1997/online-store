@@ -18,6 +18,7 @@ CREATE TABLE `order`
     buyer_id int,
     price    double not null,
     date     date   not null,
+    status   ENUM ('PAID','NEW') default 'NEW',
     FOREIGN KEY (buyer_id) references user (id),
     PRIMARY KEY (id)
 );
@@ -34,9 +35,10 @@ CREATE TABLE product
 
 CREATE TABLE product_in_order
 (
-    product_id int not null,
+    id          INTEGER AUTO_INCREMENT,
+    product_id int          not null,
     FOREIGN KEY (product_id) REFERENCES product (id),
-    order_id   int not null,
+    order_id   int          not null,
     FOREIGN KEY (order_id) REFERENCES `order` (id),
-    PRIMARY KEY (product_id, order_id)
+    PRIMARY KEY (id, product_id, order_id)
 );

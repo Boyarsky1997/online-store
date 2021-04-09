@@ -8,16 +8,26 @@ public class Order {
     private double price;
     private int count;
     private Date date;
+    private Status status;
 
     public Order() {
     }
 
-    public Order(int id, int buyerId, double price, int count, Date date) {
+    public Order(int id, int buyerId, double price, int count, Date date, Status status) {
         this.id = id;
         this.buyerId = buyerId;
         this.price = price;
         this.count = count;
         this.date = date;
+        this.status = status;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public int getId() {
@@ -68,6 +78,7 @@ public class Order {
                 ", price=" + price +
                 ", count=" + count +
                 ", date=" + date +
+                ", status=" + status +
                 '}';
     }
 }

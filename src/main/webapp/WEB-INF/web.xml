@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app>
     <servlet>
+        <servlet-name>ProfileServlet</servlet-name>
+        <servlet-class>com.github.boyarsky1997.store.servlets.ProfileServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BlacklistServlet</servlet-name>
+        <servlet-class>com.github.boyarsky1997.store.servlets.BlacklistServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>AddProductServlet</servlet-name>
         <servlet-class>com.github.boyarsky1997.store.servlets.AddProductServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BuyersServlet</servlet-name>
+        <servlet-class>com.github.boyarsky1997.store.servlets.BuyersServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
@@ -29,6 +41,18 @@
         <session-timeout>15</session-timeout>
     </session-config>
 
+    <servlet-mapping>
+        <servlet-name>ProfileServlet</servlet-name>
+        <url-pattern>/profile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlacklistServlet</servlet-name>
+        <url-pattern>/blacklist</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BuyersServlet</servlet-name>
+        <url-pattern>/buyers</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AddProductServlet</servlet-name>
         <url-pattern>/addition</url-pattern>
@@ -59,7 +83,7 @@
         <filter-class>com.github.boyarsky1997.store.filter.AuthorizationFilter</filter-class>
         <init-param>
             <param-name>blacklist</param-name>
-            <param-value>/,/login,/registration,/products,/basket,.jpg</param-value>
+            <param-value>/,/login,/registration,/products,/profile,/basket,/blacklist,/buyers,.jpg</param-value>
         </init-param>
 
     </filter>
