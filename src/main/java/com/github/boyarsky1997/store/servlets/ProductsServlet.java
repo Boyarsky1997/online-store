@@ -50,18 +50,20 @@ public class ProductsServlet extends HttpServlet {
         Product product = productDAO.getById(Integer.parseInt(id));
         HttpSession session = req.getSession(false);
         Buyer client = (Buyer) session.getAttribute("client");
-        int tmp = product.getCount() - 1;
-        if (tmp < 0) {
-            req.setAttribute("isAv",true);
-            product.setCount(tmp);
-        }else {
-            product.setCount(tmp);
-            productDAO.updateProduct(product);
-            int orderId = orderDAO.addProductInOrder(client.getId(), product.getPrice(), dateSupplier.get());
-            logger.info(orderId);
-            orderDAO.addProductInOrderByOrderIdAndProductId(Integer.parseInt(id), orderId);
+        if (product.getCount() == 0) {
+            doGet(req, resp);
+            return;
         }
-        doGet(req,resp);
+        int tmp = product.getCount() - 1;
+        product.setCount(tmp);
+        productDAO.updateProduct(product);
+        int orderId = orderDAO.getExistingOpenOrder(client.getId());
+        if (orderId == -1) {
+            orderId = orderDAO.createNewOrder(client.getId(), product.getPrice(), dateSupplier.get());
+        }
+
+        orderDAO.addProductInOrder(Integer.parseInt(id), orderId);
+        doGet(req, resp);
     }
 
 }
