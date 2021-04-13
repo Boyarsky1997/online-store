@@ -126,7 +126,7 @@ public class OrderDAO {
             preparedStatement.execute();
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(),e);
         }
     }
 }

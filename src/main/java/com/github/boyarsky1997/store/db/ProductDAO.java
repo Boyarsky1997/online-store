@@ -55,9 +55,8 @@ public class ProductDAO {
         } catch (SQLException e) {
             logger.error(e.getMessage(), e);
         }
-
-
     }
+
     public List<Product> getAllProductOnOrderId(int orderId) {
         List<Product> result = new ArrayList<>();
         try {
