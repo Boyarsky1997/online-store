@@ -37,7 +37,6 @@ public class ProductsServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         List<Product> productList = productDAO.getAll();
         logger.info(productList);
         req.setAttribute("productList", productList);
@@ -47,6 +46,7 @@ public class ProductsServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String id = req.getParameter("id");
+        logger.info(id);
         Product product = productDAO.getById(Integer.parseInt(id));
         HttpSession session = req.getSession(false);
         Buyer client = (Buyer) session.getAttribute("client");
