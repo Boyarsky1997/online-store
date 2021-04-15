@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class AuthorizationFilter implements Filter {
-    private static final Logger logger = Logger.getLogger(com.github.boyarsky1997.store.filter.AuthorizationFilter.class);
+    private static final Logger logger = Logger.getLogger(AuthorizationFilter.class);
 
     private List<String> blacklists;
 
