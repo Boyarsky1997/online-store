@@ -43,6 +43,7 @@ public class BasketServlet extends HttpServlet {
         for (Product product : productList) {
             sum = sum + product.getPrice();
         }
+        logger.info("sum :" + sum);
         req.setAttribute("sum", sum);
         req.setAttribute("productList", productList);
         req.getRequestDispatcher("/jsp/basket.jsp").forward(req, resp);
@@ -59,27 +60,7 @@ public class BasketServlet extends HttpServlet {
             logger.info("post " + order.getId());
             order.setStatus(Status.PAID);
             orderDAO.payment(order);
-        } else {
-            HttpSession session = req.getSession(false);
-            Buyer client = (Buyer) session.getAttribute("client");
-            int id = orderDAO.getExistingOpenOrder(client.getId());
-//            List<Product> productList = productDAO.getAllProductOnOrderId(id);
-            String idProduct = req.getParameter("id");
-//            logger.info(idProduct);
-//
-//            for (int i = 0; i < productList.size(); i++) {
-//                if (productList.get(i).getId() == Integer.parseInt(idProduct)) {
-//                    productList.remove(productList.get(i));
-//                }
-//            }
-//            double sum = 0;
-//            for (Product product : productList) {
-//                sum = sum + product.getPrice();
-//            }
-//            req.setAttribute("sum", sum);
-//            req.setAttribute("productList", productList);
         }
-
         doGet(req, resp);
     }
 }
