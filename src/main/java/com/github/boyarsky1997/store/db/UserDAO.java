@@ -88,7 +88,7 @@ public class UserDAO {
             preparedStatement.execute();
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
         }
     }
 
@@ -107,7 +107,7 @@ public class UserDAO {
             preparedStatement.execute();
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
         }
     }
 
