@@ -8,6 +8,10 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class LogOutServlet extends HttpServlet {
+
+    public LogOutServlet() {
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
