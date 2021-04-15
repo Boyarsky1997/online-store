@@ -39,6 +39,7 @@ public class BlacklistServlet extends HttpServlet {
         String id = req.getParameter("id");
         Buyer buyer = userDAO.getBuyer(Integer.parseInt(id));
         userDAO.addOnBuyers(buyer);
+        logger.info("id: "+ buyer.getId());
         doGet(req, resp);
     }
 }
