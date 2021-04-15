@@ -33,11 +33,11 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String password = req.getParameter("password");
         String email = req.getParameter("email");
-        System.out.println(email + password);
+        logger.info(email + password);
         User client = userDAO.get(email, password);
 
         logger.info(client);
-        if (client == null) {
+        if (client== null) {
             req.setAttribute("unfaithful", "Incorrect login or password");
             req.getRequestDispatcher("/jsp/login.jsp").include(req, resp);
         }else if (client.isBlackList()){
