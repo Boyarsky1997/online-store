@@ -21,25 +21,22 @@ public class ProfileServlet extends HttpServlet {
     private static final Logger logger = Logger.getLogger(ProfileServlet.class);
     private OrderDAO orderDAO;
     private ProductDAO productDAO;
-    private UserDAO userDAO;
 
     public ProfileServlet() {
-        this(new ProductDAO(), new UserDAO(), new OrderDAO());
+        this(new ProductDAO(), new OrderDAO());
     }
 
-    public ProfileServlet(ProductDAO productDAO, UserDAO userDAO, OrderDAO orderDAO) {
+    public ProfileServlet(ProductDAO productDAO, OrderDAO orderDAO) {
         this.productDAO = productDAO;
-        this.userDAO = userDAO;
         this.orderDAO = orderDAO;
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
-
-        session.getAttribute("client");
         Buyer buyer = (Buyer) session.getAttribute("client");
         List<Order> paidOrders = orderDAO.getPaidProducts(buyer.getId());
+        logger.info(paidOrders);
         double sum = 0;
         for (Order paidOrder : paidOrders) {
             List<Product> allProductOnOrderId = productDAO.getAllProductOnOrderId(paidOrder.getId());
