@@ -1,5 +1,13 @@
 version: "3.3"
 services:
+  web:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      WEB_APP_HOSTNAME: "mysql"
+    depends_on:
+      - mysql
   mysql:
     image: "mysql"
     hostname: "mysql"
